@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Municipio;
 use App\Models\Departamento;
+use App\Models\Distritos;
 use App\Http\Requests\SaveInfoDepartamento;
 use App\Http\Requests\SaveInfoMunicipio;
 
@@ -41,6 +42,24 @@ class UbicacionController extends Controller
         return response()->json(array(
             'message'=>"LISTADO DE MUNICIPIOS",
             'data'=>$municipio,
+            'code'=>200,
+        ),200);
+    }
+
+    #Listado distritos
+    public function indexDistrito(){
+        # Listado por distrito
+        $distrito = Distritos ::all();
+        if(count($distrito)<1){
+            return response()->json(array(
+                'message'=>"No se encontraron Distritos.",
+                'data'=>$distrito,
+                'code'=>404,
+            ),404);
+        }
+        return response()->json(array(
+            'message'=>"Listado de Distritos",
+            'data'=>$distrito,
             'code'=>200,
         ),200);
     }
@@ -84,9 +103,55 @@ class UbicacionController extends Controller
          ),200);
      }
 
+     #Busqueda por nombre de distrito
+    public function showDistrito(Request $request, string $nombre){
+        #Busqueda de distrito 
+         $distrito=Distritos::where('nombre','=',$nombre)->first();
+ 
+         #Validando
+         if($distrito==NULL){
+             return response()->json(array(
+                 'message'=>"Municipio no encontrado.",
+                 'data'=>$distrito,
+                 'code'=>404,
+             ),404);
+         }
+         return response()->json(array(
+             'message'=>"Distrito encontrado",
+             'data'=>$distrito,
+             'code'=>200,
+         ),200);
+     }
 
-     //Creando un nuevo departamento
-     public function storeDepartamento(SaveInfoDepartamento $request){
+
+
+     # Creando un nuevo distrito
+     public function storeDistrito(Request $request){
+
+        $request->validated();
+        $data = array(
+            'nombre'=>$request->nombre,
+        );
+
+        $newDistrito = new Distritos ($data);
+
+
+        if($newDistrito->save()==false){
+            return response()->json(array(
+                'message'=>"El distrito no pudo ser agregado",
+                'data'=>$data,
+                'code'=>422,
+            ),422);
+        }
+        return response()->json(array(
+            'message'=>"Distrito agregado",
+            'data'=>$newDistrito,
+            'code'=>201,
+        ),201);
+    }
+
+    //Creando un nuevo departamento
+    public function storeDepartamento(SaveInfoDepartamento $request){
 
         $request->validated();
         $data = array(

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('distritos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',255);
+            $table->foreignId('municipio_id')->references('id')->on('municipio');
             $table->timestamps();
         });
     }
