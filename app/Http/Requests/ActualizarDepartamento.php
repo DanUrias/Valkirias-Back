@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveInfoMunicipio extends FormRequest
+class ActualizarDepartamento extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,6 @@ class SaveInfoMunicipio extends FormRequest
     public function rules()
     {
         return [
-            'departamento_id'=>array(
-                'required',
-                'int'
-            ),
             'nombre'=>array(
                 'required'
             )
