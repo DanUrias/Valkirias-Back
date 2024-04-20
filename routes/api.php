@@ -56,6 +56,13 @@ Route::post('/store/municipio',array(
     UbicacionController::class,
     'storeMunicipio',
 ));
+
+//Ruta para agregar un departaento-municipio
+Route::post('/store/depmun',array(  
+    UbicacionController::class,
+    'storeDepMun',
+));
+
 //Routa para modificar municipio 
 Route::put('/update/departamento/{id}',array(  
     UbicacionController::class,
