@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('municipio', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('departamento_id')->references('id')->on('departamento');
             $table->string('nombre',255);
             $table->timestamps();
         });
