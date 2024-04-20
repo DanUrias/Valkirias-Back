@@ -69,26 +69,22 @@ class UbicacionController extends Controller
         ),200);
     }
 
-    //busqueda por nombre de municipio
-    public function showMunicipio(Request $request, string $nombre){
-        //buscar departamento por nombre
-         $municipio=municipio::where('nombre','=',$nombre)->first();
- 
-         //Validando
-         if($municipio==NULL){
-             return response()->json(array(
-                 'message'=>"MUNICIPIO NO ENCONTRADO",
-                 'data'=>$municipio,
-                 'code'=>404,
-             ),404);
-         }
-         return response()->json(array(
-             'message'=>"MUNICIPIO ENCONTRADO",
-             'data'=>$municipio,
-             'code'=>200,
-         ),200);
-     }
+    //Listando todos los municipios según su departamento
 
+    public function showMunicipio(Request $request, string $departamento_id){
+        $municipios = Municipio::where('departamento_id', $departamento_id)->get();
+        if($municipios->isEmpty()){
+            return response()->json([
+                'message' => "No se encontraron municipios",
+                'code' => 404,
+            ], 404);
+        }
+        return response()->json([
+            'message' => "Municipios encontrados",
+            'data' => $municipios,
+            'code' => 200,
+        ], 200);
+    }
 
      //Creando un nuevo departamento
      public function storeDepartamento(GuardarInfoDepartamento $request){
@@ -199,11 +195,6 @@ class UbicacionController extends Controller
             'data'=>$municipio,
             'code'=>200,
         ),200);
-    }
-
-    Public function municipios (Departamento $Departamento)
-    {
-        return $Departamento->municipios;
     }
 
 }

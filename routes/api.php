@@ -41,7 +41,9 @@ Route::get("/show-departamento/{nombre}",array(
     UbicacionController::class,
     'showDepartamento',
 ));
-Route::get("/show-municipio/{nombre}",array(
+
+//listar municipio por departamento
+Route::get("/municipio/departamento/{departamento_id}",array(
     UbicacionController::class,
     'showMunicipio',
 ));
@@ -72,10 +74,4 @@ Route::put('/update/departamento/{id}',array(
 Route::put('/update/municipio/{id}',array(  
     UbicacionController::class,
     'updateMunicipio',
-)); 
-
-//listar
-Route::get("/municipios/departamentos",array(
-    UbicacionController::class,
-    'municipios',
 ));
