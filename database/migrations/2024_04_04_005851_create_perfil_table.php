@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('perfil', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('municipio_id')->references ('id')->on('municipio');
             $table->string('nombres',90);
             $table->string('contactos',80);
             $table->string('email',50);
             $table->date('fecha_nacimiento');
-            $table->foreignId('municipios')-> references ('id')-> on ('municipio');
             $table->timestamps();
         });
     }

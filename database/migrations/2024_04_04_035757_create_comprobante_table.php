@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('comprobante', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_usuario')-> references ('id')-> on ('usuarios');
-            $table->foreignId('metodo')-> references ('id')-> on ('metodo_pago');
+            $table->foreignId('usuario_id')-> references ('id')-> on ('usuarios');
+            $table->foreignId('metodo_id')-> references ('id')-> on ('metodo_pago');
             $table->foreignId('num_factura')-> references ('id')-> on ('facturas');
             $table->string('tipo_comprobante',50);
             $table->string('estado',20);

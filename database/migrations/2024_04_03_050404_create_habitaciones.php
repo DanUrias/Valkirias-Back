@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->id();
-            #$table->foreignId('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreignId('tipo_habitaciones_id')->references('id')->on('tipo_habitaciones');
             $table->foreignId('foto_id')->references('id')->on('foto');
             $table->integer('no_habitaciones');

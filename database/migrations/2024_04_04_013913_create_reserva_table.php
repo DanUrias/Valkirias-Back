@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('reserva', function (Blueprint $table) {
             $table->id();
             $table->string('nombres',90);
-            $table->foreignId('usuario')-> references ('id')-> on ('usuarios');
-            $table->foreignId('id_hotel')-> references ('id')-> on ('hotel');
-            $table->foreignId('factura')-> references ('id')-> on ('facturas');
+            $table->foreignId('usuario_id')-> references ('id')-> on ('usuarios');
+            $table->foreignId('hotel_id')-> references ('id')-> on ('hotel');
+            $table->foreignId('factura_id')-> references ('id')-> on ('facturas');
             $table->date('fecha_reserva');
             $table->datetime('check in');
             $table->datetime('check out');
