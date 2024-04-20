@@ -73,3 +73,9 @@ Route::put('/update/municipio/{id}',array(
     UbicacionController::class,
     'updateMunicipio',
 )); 
+
+//listar
+Route::get("/municipios/departamentos",array(
+    UbicacionController::class,
+    'municipios',
+));

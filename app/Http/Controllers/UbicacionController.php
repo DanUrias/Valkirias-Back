@@ -201,4 +201,9 @@ class UbicacionController extends Controller
         ),200);
     }
 
+    Public function municipios (Departamento $Departamento)
+    {
+        return $Departamento->municipios;
+    }
+
 }
