@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Municipio;
 use App\Models\Departamento;
-use App\Http\Requests\SaveInfoDepartamento;
-use App\Http\Requests\SaveInfoMunicipio;
+use App\Models\DepartamentoMunicipio;
+use App\Http\Requests\GuardarInfoDepartamento;
+use App\Http\Requests\GuardarInfoMunicipio;
+use App\Http\Requests\ActualizarDepartamento;
+use App\Http\Requests\ActualizarMunicipio;
+use App\Http\Requests\GuardarDepMun;
+use App\Http\Requests\ActualizarDepMun;
 
 class UbicacionController extends Controller
 {
@@ -15,13 +20,13 @@ class UbicacionController extends Controller
         $departamento = departamento::all();
         if(count($departamento)<1){
             return response()->json(array(
-                'message'=>"No se encontraron Departamentos.",
+                'message'=>"DEPARTAMENTOS NO ENCONTRADOS",
                 'data'=>$departamento,
                 'code'=>404,
             ),404);
         }
         return response()->json(array(
-            'message'=>"LISTADO DE Departamentos",
+            'message'=>"LISTADO DE DEPARTAMENTOS",
             'data'=>$departamento,
             'code'=>200,
         ),200);
@@ -33,7 +38,7 @@ class UbicacionController extends Controller
         $municipio = municipio::all();
         if(count($municipio)<1){
             return response()->json(array(
-                'message'=>"No se encontraron Municipios.",
+                'message'=>"MUNICIPIOS NO ENCONTRADOS",
                 'data'=>$municipio,
                 'code'=>404,
             ),404);
@@ -52,7 +57,7 @@ class UbicacionController extends Controller
 
         if($departamento==NULL){
             return response()->json(array(
-                'message'=>"Departamento no encontrado.",
+                'message'=>"DEPARTAMENTO NO ENCONTRADO",
                 'data'=>$departamento,
                 'code'=>404,
             ),404);
@@ -64,29 +69,25 @@ class UbicacionController extends Controller
         ),200);
     }
 
-    //busqueda por nombre de municipio
-    public function showMunicipio(Request $request, string $nombre){
-        //buscar departamento por nombre
-         $municipio=municipio::where('nombre','=',$nombre)->first();
- 
-         //Validando
-         if($municipio==NULL){
-             return response()->json(array(
-                 'message'=>"Municipio no encontrado.",
-                 'data'=>$municipio,
-                 'code'=>404,
-             ),404);
-         }
-         return response()->json(array(
-             'message'=>"MUNICIPIO ENCONTRADO",
-             'data'=>$municipio,
-             'code'=>200,
-         ),200);
-     }
+    //Listando todos los municipios según su departamento
 
+    public function showMunicipio(Request $request, string $departamento_id){
+        $municipios = Municipio::where('departamento_id', $departamento_id)->get();
+        if($municipios->isEmpty()){
+            return response()->json([
+                'message' => "No se encontraron municipios",
+                'code' => 404,
+            ], 404);
+        }
+        return response()->json([
+            'message' => "Municipios encontrados",
+            'data' => $municipios,
+            'code' => 200,
+        ], 200);
+    }
 
      //Creando un nuevo departamento
-     public function storeDepartamento(SaveInfoDepartamento $request){
+     public function storeDepartamento(GuardarInfoDepartamento $request){
 
         $request->validated();
         $data = array(
@@ -98,20 +99,20 @@ class UbicacionController extends Controller
 
         if($newDepartamento->save()==false){
             return response()->json(array(
-                'message'=>"EL departamento no pudo ser agregado",
+                'message'=>"EL DEPARTAMENTO NO PUDO SER AGREGADO",
                 'data'=>$data,
                 'code'=>422,
             ),422);
         }
         return response()->json(array(
-            'message'=>"Departamento agregado",
+            'message'=>"DEPARTAMENTO AGREGADO CON EXITO",
             'data'=>$newDepartamento,
             'code'=>201,
         ),201);
     }
 
      //Creando un nuevo Municipio
-     public function storeMunicipio(SaveInfoMunicipio $request){
+     public function storeMunicipio(GuardarInfoMunicipio $request){
 
         $request->validated();
         $data = array(
@@ -124,26 +125,27 @@ class UbicacionController extends Controller
 
         if($newMunicipio->save()==false){
             return response()->json(array(
-                'message'=>"EL municipio no pudo ser agregado",
+                'message'=>"EL MUNICIPIO NO PUDO SER AGREGADO",
                 'data'=>$data,
                 'code'=>422,
             ),422);
         }
         return response()->json(array(
-            'message'=>"Municipio agregado",
+            'message'=>"MUNICIPIO AGREGADO",
             'data'=>$newMunicipio,
             'code'=>201,
         ),201);
     }
     
     //actualizando departamento
-    public function updateDepartamento(Request $request, int $id)
+    public function updateDepartamento(ActualizarDepartamento $request, int $id)
     {
+        $request->validated();
         $departamento=departamento::where('id','=',$id)->first();
 
         if($departamento==NULL){
             return response()->json(array(
-                'message'=>"Departamento no encontrado.",
+                'message'=>"DEPARTAMENTO NO ENCONTRADO",
                 'data'=>$departamento,
                 'code'=>404,
             ),404);
@@ -152,26 +154,27 @@ class UbicacionController extends Controller
 
         if($departamento->save()==false){
             return response()->json(array(
-                'message'=>"Departamento no actualizado",
+                'message'=>"NO SE ACTUALIZO EL DEPARTAMENTO",
                 'data'=>$departamento,
                 'code'=>422,
             ),422);
         }
         return response()->json(array(
-            'message'=>"Departamento actualizado con exito",
+            'message'=>"DEPARTAMENTO ACTUALIZADO CON EXITO",
             'data'=>$departamento,
             'code'=>200,
         ),200);
     }
 
     //actualizando municipio
-    public function updateMunicipio(Request $request, int $id)
+    public function updateMunicipio(ActualizarMunicipio $request, int $id)
     {
+        $request->validated();
         $municipio=municipio::where('id','=',$id)->first();
 
         if($municipio==NULL){
             return response()->json(array(
-                'message'=>"Municipio no encontrado.",
+                'message'=>"MUNICIPIO NO ENCONTRADO",
                 'data'=>$municipio,
                 'code'=>404,
             ),404);
@@ -182,13 +185,13 @@ class UbicacionController extends Controller
 
         if($municipio->save()==false){
             return response()->json(array(
-                'message'=>"Municipio no actualizado",
+                'message'=>"MUNICIPIO NO ACTUALIZADO",
                 'data'=>$municipio,
                 'code'=>422,
             ),422);
         }
         return response()->json(array(
-            'message'=>"Municipio actualizado con exito",
+            'message'=>"MUNICIPIO ACTUALIZADO CON EXITO",
             'data'=>$municipio,
             'code'=>200,
         ),200);
