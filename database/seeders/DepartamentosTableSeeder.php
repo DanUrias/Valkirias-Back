@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Departamento;
 
 class DepartamentosTableSeeder extends Seeder
 {
@@ -14,8 +14,7 @@ class DepartamentosTableSeeder extends Seeder
      */
     public function run()
     {
-        //Creación de seeders pra la tabla departament
-        $departamento=[
+        $departamentos = [
             'Ahuachapán',
             'Cabañas',
             'Chalatenango',
@@ -24,15 +23,16 @@ class DepartamentosTableSeeder extends Seeder
             'La Paz',
             'La Unión',
             'Morazán',
-            'Santa Ana',
             'San Miguel',
             'San Salvador',
             'San Vicente',
+            'Santa Ana',
             'Sonsonate',
             'Usulután',
         ];
-        foreach ($departamentos as $departamento){
-            Departamento::create(['nombre'=>$departamento]);
+
+        foreach ($departamentos as $departamento) {
+            Departamento::create(['nombre' => $departamento]);
         }
     }
 }
