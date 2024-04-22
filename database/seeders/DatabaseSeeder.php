@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DepartamentosTableSeeder::class,
+            MunicipiosTableSeeder::class,
         ]);
     }
 }
