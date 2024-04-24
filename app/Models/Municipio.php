@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Municipio extends Model
+class municipio extends Model
 {
     use HasFactory;
-    //Tabla que va a interpretar 
-    private $table ="municipio";//nombre exacto de la tabla
+    
+    private $table ="municipio";
    
-    //Campos requeridos, para agregar y actualizar. Todos los campos excepto los de llave primaria.
+   
     public $fillable = [
    
           'nombres',

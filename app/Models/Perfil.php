@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class create_perfil_table extends Model
+class perfil extends Model
 {
     use HasFactory;
   //Tabla que va a interpretar 
@@ -15,10 +15,12 @@ class create_perfil_table extends Model
   public $fillable = [
 
         'nombres',
-        'contactos',
-        'email',
+        'apellidos',
+        'correo electronico',
+        'dui',
+        'usuario',
         'fecha_nacimiento',
-        'municipio',
+        'clave',
 
   ];
 

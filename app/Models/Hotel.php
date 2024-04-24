@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class hotel extends Model
 {
     use HasFactory;
     //Tabla que va a interpretar 
@@ -18,8 +18,8 @@ class Hotel extends Model
         'habitaciones_id',
         'fotos',
         'nombre',
-        'contacto',
         'email',
+        'contacto',
         'contraseña',
         'whatsApp',
         'direccion',

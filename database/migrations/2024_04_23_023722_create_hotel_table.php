@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('hotel', function (Blueprint $table) {
             $table->id();
             $table->foreignId('municipio_id')->references('id')->on('municipio');
-            $table->foreignId('habitaciones_id')->references('id')->on('habitaciones');
-            $table->foreignId('fotos')->references('id')->on('foto');
+            $table->foreignId('habitacion_id')->references('id')->on('habitacion');
+            $table->foreignId('fotos')->references('id')->on('fotos');
             $table->string('nombre',255);
-            $table->string('contacto',255);
             $table->string('email',255);
+            $table->string('contacto',255);
             $table->text('contraseña');
             $table->string('whatsApp',255);
             $table->string('direccion',255);

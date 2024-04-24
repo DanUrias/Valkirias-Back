@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('municipio', function (Blueprint $table) {
+        Schema::create('habitacion', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('departamento_id')->references('id')->on('departamento');
-            $table->string('nombre',255);
+            $table->foreignId('tipo_habitaciones_id')->references('id')->on('tipo_habitaciones');
+            $table->foreignId('foto_id')->references('id')->on('foto');
+            $table->integer('no_habitaciones');
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('municipio');
+        Schema::dropIfExists('habitacion');
     }
 };

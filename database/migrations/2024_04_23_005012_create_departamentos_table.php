@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('habitaciones', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
-            #$table->foreignId('disponibilidad_id')->references('id')->on('disponibilidad');
-            $table->foreignId('tipo_habitaciones_id')->references('id')->on('tipo_habitaciones');
-            $table->foreignId('foto_id')->references('id')->on('foto');
-            $table->integer('no_habitaciones');
+            $table->string('nombres',255);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('habitaciones');
+        Schema::dropIfExists('departamentos');
     }
 };

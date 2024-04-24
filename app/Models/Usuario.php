@@ -12,7 +12,7 @@ class usuario extends Model
 
 
 //Tabla que va a interpretar 
-private $table ="servicios";//nombre exacto de la tabla
+private $table ="usuarios";//nombre exacto de la tabla
 
 //Campos requeridos, para agregar y actualizar. Todos los campos excepto los de llave primaria.
 public $fillable = [
@@ -27,5 +27,6 @@ private $hidden = [
     'id' //contraseñas
 ];
 }
+
 
 

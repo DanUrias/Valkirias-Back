@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('create_reserva_tables', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->string('nombres',90);
-            $table->foreignId('id_usuario')-> references ('id')-> on ('usuario');
+            $table->string('apellidos',90);
+            $table->foreignId('usuario')-> references ('id')-> on ('usuarios');
             $table->foreignId('id_hotel')-> references ('id')-> on ('hotel');
-            $table->foreignId('factura')-> references ('N°_factura')-> on ('factura');
+            $table->foreignId('factura')-> references ('id')-> on ('facturas');
             $table->date('fecha_reserva');
             $table->datetime('check in');
             $table->datetime('check out');
-            $table->string('estadoReserva');
+            $table->string('estadoReserva',250);
 
             
             $table->timestamps();
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('create_reserva_tables');
+        Schema::dropIfExists('reservas');
     }
 };

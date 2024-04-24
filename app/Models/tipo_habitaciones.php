@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servicio extends Model
+class tipo_habitaciones extends Model
 {
- 
     use HasFactory;
 
 
 
     //Tabla que va a interpretar 
-    private $table ="servicios";//nombre exacto de la tabla
+    private $table ="tipo_habitaciones";//nombre exacto de la tabla
     
     //Campos requeridos, para agregar y actualizar. Todos los campos excepto los de llave primaria.
     public $fillable = [
-        'Comida',
-        'Limpieza',
-        'Desinfeccion'
+            'serviciosid',
+            'tipo',
+            'precio',
+            'no_personas'
     ];
     
     //Campos ocultos
@@ -27,4 +27,5 @@ class Servicio extends Model
         'id' //contraseñas
     ];
     }
+    
     

@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perfil', function (Blueprint $table) {
+        Schema::create('municipio', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres',90);
-            $table->string('contactos',80);
-            $table->string('email',50);
-            $table->date('fecha_nacimiento');
-            $table->foreignId('municipio')-> references ('names')-> on ('municipios');
+            $table->foreignId('departamento_id')->references('id')->on('departamentos');
+            $table->string('nombre',255);
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('create_perfil_tables');
+        Schema::dropIfExists('municipio');
     }
 };
