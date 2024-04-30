@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombres',90);
             $table->string('apellidos',80);
             $table->string('correo electronico',50);
-            $table->string('dui', 10)->unique();
+            #$table->string('dui', 10)->unique();
             $table->date('fecha_nacimiento');
             $table->string('usuario',20);
             $table->text('clave');
